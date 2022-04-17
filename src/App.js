@@ -8,6 +8,11 @@ import Signin from './Signin';
 import Signup from './Signup';
 import AddPlaces from './AddPlaces';
 import AddStudents from './AddStudent';
+function DemoVideo() {
+  window.location.href = "https://www.youtube.com/channel/UCB64f614ehCdY_5xZvMlCaQ"
+  return(<>
+  </>)
+}
 function App() {
   return (
     <Router>
@@ -21,6 +26,7 @@ function App() {
         <Route path="/reports" element={<Reports />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/demo-video" element={<DemoVideo />} />
       </Routes>
     </Router>
   );

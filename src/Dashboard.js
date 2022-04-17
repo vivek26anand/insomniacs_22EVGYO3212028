@@ -2,9 +2,9 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 function Content(){
   const [stats,setStats] = useState([
-    { name: 'Total Students', stat: '4763' },
-    { name: 'New Students', stat: '213' },
-    { name: 'New Places', stat: '2' },
+    { name: 'Total Students', stat: '0' },
+    { name: 'New Students', stat: '0' },
+    { name: 'New Places', stat: '0' },
   ])
   return(<>
    <div className="px-6">

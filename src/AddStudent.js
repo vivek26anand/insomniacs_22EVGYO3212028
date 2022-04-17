@@ -37,7 +37,7 @@ function Content(){
           phone:e.target.phone.value,
           place:e.target.location.value
         }).then(()=>{
-          navigate('/places')
+          navigate('/students')
         })
       }}>
       <div className="flex items-center justify-between">
