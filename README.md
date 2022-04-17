@@ -10,3 +10,8 @@ Develop a web/mobile app to manage rental homes for students all across the city
 
 
 ## Tech Stack
+
+- React Js
+- Tailwind Css
+- Tailwind components
+- Firebase
