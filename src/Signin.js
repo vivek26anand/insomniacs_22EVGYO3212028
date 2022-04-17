@@ -1,9 +1,9 @@
 import { BsGoogle } from "react-icons/bs";
 import { useState } from "react";
-import { signInWithEmailAndPassword, updateProfile,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase";
 import {useNavigate} from 'react-router-dom';
-import logo from './logo.png';
+import logo from './logoBlack.png';
 const provider = new GoogleAuthProvider();
 export default function Example() {
   const [error, setError] = useState('');

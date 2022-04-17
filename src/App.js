@@ -6,7 +6,8 @@ import Students from './Students';
 import Reports from './Reports';
 import Signin from './Signin';
 import Signup from './Signup';
-
+import AddPlaces from './AddPlaces';
+import AddStudents from './AddStudent';
 function App() {
   return (
     <Router>
@@ -14,7 +15,9 @@ function App() {
       <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/places" element={<Places />} />
+        <Route path="/places/add-new" element={<AddPlaces />} />
         <Route path="/students" element={<Students />} />
+        <Route path="/students/add-new" element={<AddStudents />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />

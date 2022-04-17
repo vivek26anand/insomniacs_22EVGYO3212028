@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from './firebase';
 import {
   BellIcon,
   ChartBarIcon,
@@ -30,11 +32,27 @@ export default function Sidebar({menuNumber,MenuComponent}) {
     { name: 'Students', href: '/students', icon: UsersIcon, current: false },
     { name: 'Reports', href: '/reports', icon: ChartBarIcon, current: false },
   ])
+  const [userPhoto,setUserPhoto] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/User_icon-cp.svg/1200px-User_icon-cp.svg.png');
   useEffect(() => {
     const newMenu = Array.from(menu)
     newMenu[menuNumber].current = true
      setMenu(newMenu)
   },[]);
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        localStorage.setItem('userId', uid);
+        const photoURL = user.photoURL;
+        setUserPhoto(photoURL)
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
   return (
     <>
       <div>
@@ -84,8 +102,8 @@ export default function Sidebar({menuNumber,MenuComponent}) {
                 <div className="flex-shrink-0 flex items-center px-4">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                    alt="Workflow"
+                    src={logo}
+                    alt="rentlinq"
                   />
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
@@ -117,7 +135,7 @@ export default function Sidebar({menuNumber,MenuComponent}) {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col flex-grow pt-5 bg-indigo-700 overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
+            <div className="flex items-center flex-shrink-0 p-16">
               <img
                 className="h-auto w-auto"
                 src={logo}
@@ -189,7 +207,7 @@ export default function Sidebar({menuNumber,MenuComponent}) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={userPhoto}
                         alt=""
                       />
                     </Menu.Button>

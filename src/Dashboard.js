@@ -2,9 +2,9 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 function Content(){
   const [stats,setStats] = useState([
-    { name: 'Total Subscribers', stat: '71,897' },
-    { name: 'Avg. Open Rate', stat: '58.16%' },
-    { name: 'Avg. Click Rate', stat: '24.57%' },
+    { name: 'Total Students', stat: '4763' },
+    { name: 'New Students', stat: '213' },
+    { name: 'New Places', stat: '2' },
   ])
   return(<>
    <div className="px-6">

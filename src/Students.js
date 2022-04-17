@@ -3,7 +3,7 @@ import {LocationMarkerIcon} from '@heroicons/react/outline'
 import Sidebar from "./Sidebar";
 function Content(){
     const people = [
-        { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
+        { name: 'Vivek Anand', title: 'Techno Pg (id: PL12DT67)', email: 'STU5467FHTFDH', role: 'Member' },
         // More people...
       ]
   return(<>
@@ -16,12 +16,13 @@ function Content(){
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <button
+          <a
+            href="/students/add-new"
             type="button"
             className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
           >
             Add Student
-          </button>
+          </a>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -40,9 +41,6 @@ function Content(){
                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                       Student Id
                     </th>
-                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                      <span className="sr-only">Edit</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -55,7 +53,12 @@ function Content(){
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.email}</td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        reallocate<span className="sr-only">, {person.name}</span>
+                        Edit<span className="sr-only">, {person.name}</span>
+                        </a>
+                      </td>
+                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        Reallocate<span className="sr-only">, {person.name}</span>
                         </a>
                       </td>
                     </tr>

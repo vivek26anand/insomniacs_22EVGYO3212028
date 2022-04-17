@@ -8,12 +8,12 @@ const crud = class {
     async getPlaces(){
         const docs = []
         const querySnapshot = await getDocs(collection(db, `users/${this.userId}/places`));
-        for await (const doc of querySnapshot) {
+        await querySnapshot.forEach((doc) => {
             docs.push({
                 id: doc.id,
                 data: doc.data()
             })
-        }
+          });
         return docs
     }
     async getPlace(placeId){
@@ -25,7 +25,7 @@ const crud = class {
           }
     }
     async addPlace(place){
-        const placeRef = await addDoc(doc(db, `users/${this.userId}/places`), place);
+        const placeRef = await addDoc(collection(db, `users/${this.userId}/places`), place);
         return placeRef.id;
     }
     async updatePlace(placeId, place){

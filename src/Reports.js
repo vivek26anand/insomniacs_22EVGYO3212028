@@ -3,10 +3,10 @@ import {DocumentReportIcon} from '@heroicons/react/outline'
 import Sidebar from "./Sidebar";
 function Content(){
   const [report,setReports] = useState([{
-    name:"",
-    date:"",
-    id: 0
-  },2,3,4]);
+    name:"Students Report",
+    date:"25/04/22",
+    id: "R547NHGF"
+  }]);
   return(<>
   <div className="px-6">
       <div className="flex items-center justify-between">
@@ -28,10 +28,10 @@ function Content(){
             <DocumentReportIcon className="h-10 w-10 mr-8"/>
             <div className="w-full">
               <dd className="text-2xl font-semibold text-gray-900">
-                Report Name
+                {report.name}
               </dd>
-              <dt className="text-sm font-medium text-gray-500 truncate">25/04/22</dt>
-              <dt className="text-sm font-medium text-gray-500 truncate">report id</dt>
+              <dt className="text-sm font-medium text-gray-500 truncate">{report.date}</dt>
+              <dt className="text-sm font-medium text-gray-500 truncate">{report.id}</dt>
             </div>
             <div className="text-center">
               <button className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-500">View</button>
