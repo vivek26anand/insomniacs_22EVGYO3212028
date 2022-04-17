@@ -1,11 +1,37 @@
 import { useEffect,useState } from "react";
 import {LocationMarkerIcon} from '@heroicons/react/outline'
 import Sidebar from "./Sidebar";
+import api from "./crud";
 function Content(){
     const people = [
         { name: 'Vivek Anand', title: 'Techno Pg (id: PL12DT67)', email: 'STU5467FHTFDH', role: 'Member' },
         // More people...
       ]
+      const [students,setStudents] = useState([{
+        name:"Loading...",
+        address:"",
+        id: ""
+      }]);
+      useEffect(()=>{
+          if(localStorage.getItem('userId')){
+              const db = new api(localStorage.getItem('userId'));
+              db.getStudents().then(async (d)=>{
+                  if(d.length !== 0){
+                    const p = []
+                    for await (const e of d){
+                      p.push({
+                        name: e.data.name,
+                        place: e.data.place,
+                        id: e.id,
+                      })
+                      setStudents(p)
+                    }
+                  } else {
+                    setStudents([])
+                  }
+              })
+          }
+      },[])
   return(<>
    <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -44,13 +70,13 @@ function Content(){
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {people.map((person) => (
-                    <tr key={person.email}>
+                  {students.map((person,index) => (
+                    <tr key={index}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {person.name}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.title}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.email}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.place}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{person.id}</td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only">, {person.name}</span>

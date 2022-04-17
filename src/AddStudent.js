@@ -1,12 +1,44 @@
 import { useEffect,useState } from "react";
 import {LocationMarkerIcon} from '@heroicons/react/outline'
+import {useNavigate} from 'react-router-dom';
 import Sidebar from "./Sidebar";
+import api from "./crud";
 function Content(){
+  const navigate = useNavigate();
+  const [places,setPlaces] = useState([]);
+  const [userId,setUserId] = useState('');
+  useEffect(()=>{
+      if(localStorage.getItem('userId')){
+        setUserId(localStorage.getItem('userId'))
+          const db = new api(localStorage.getItem('userId'));
+          db.getPlaces().then(async (d)=>{
+              if(d.length !== 0){
+                const p = []
+                for await (const e of d){
+                  p.push({
+                    name: e.data.name,
+                    id: e.id
+                  })
+                }
+                setPlaces(p)
+              }
+          })
+      }
+  },[])
   return(<>
   <div className="px-6">
       
       <form className="space-y-8 divide-y divide-gray-200" action="#" method="POST" onSubmit={(e)=>{
         e.preventDefault();
+        const db = new api(userId);
+        db.addStudent({
+          name:e.target.name.value,
+          address:e.target.address.value,
+          phone:e.target.phone.value,
+          place:e.target.location.value
+        }).then(()=>{
+          navigate('/places')
+        })
       }}>
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
@@ -46,8 +78,8 @@ function Content(){
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
                   <input
-                    type="text"
-                    id="name"
+                    type="tel"
+                    id="phone"
                     className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-300"
                     required
                   />
@@ -77,14 +109,15 @@ function Content(){
               <div className="mt-1 sm:mt-0 sm:col-span-2">
               <select
                     id="location"
-                    name="location"
                     className="mt-1 block max-w-lg pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                    defaultValue="Pg 1"
+                    defaultValue=""
                     required
                 >
-                    <option>Pg 1</option>
-                    <option>Pg 2</option>
-                    <option>Pg 3</option>
+                  {places.map((p,index)=>(
+                    <option key={index}>
+                      {p.name} | {p.id}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
